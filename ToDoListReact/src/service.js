@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // כתובת ה-API שלךמפ
-const apiUrl = "http://localhost:5005";
+const apiUrl = "https://todolist1-j5q6.onrender.com";
 
 const apiService = {
   // שליפת כל המשימות
