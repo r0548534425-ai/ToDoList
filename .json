@@ -1,0 +1,36 @@
+[1mdiff --git a/ToDoListC#/Program.cs b/ToDoListC#/Program.cs[m
+[1mindex e7d44a9..051cb18 100644[m
+[1m--- a/ToDoListC#/Program.cs[m
+[1m+++ b/ToDoListC#/Program.cs[m
+[36m@@ -2,7 +2,6 @@[m [musing Microsoft.EntityFrameworkCore;[m
+ using Microsoft.OpenApi.Models;[m
+ using TodoApi;[m
+ [m
+[31m-[m
+ var builder = WebApplication.CreateBuilder(args);[m
+ [m
+ // Configure Services[m
+[36m@@ -24,6 +23,23 @@[m [mbuilder.Services.AddSwaggerGen(c =>[m
+ [m
+ var app = builder.Build();[m
+ [m
+[32m+[m[32m// --- בדיקת חיבור למסד ---[m
+[32m+[m[32musing (var scope = app.Services.CreateScope())[m
+[32m+[m[32m{[m
+[32m+[m[32m    var db = scope.ServiceProvider.GetRequiredService<ToDoDbContext>();[m
+[32m+[m[32m    try[m
+[32m+[m[32m    {[m
+[32m+[m[32m        if (db.Database.CanConnect())[m
+[32m+[m[32m            Console.WriteLine("? Connected to Clever-Cloud MySQL");[m
+[32m+[m[32m        else[m
+[32m+[m[32m            Console.WriteLine("? Cannot connect to database");[m
+[32m+[m[32m    }[m
+[32m+[m[32m    catch (Exception ex)[m
+[32m+[m[32m    {[m
+[32m+[m[32m        Console.WriteLine($"? Database connection failed: {ex.Message}");[m
+[32m+[m[32m    }[m
+[32m+[m[32m}[m
+[32m+[m
+ // Middleware[m
+ app.UseCors();[m
+ app.UseSwagger();[m

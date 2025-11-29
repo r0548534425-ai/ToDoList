@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\user1\\Pictures\\הגשה 3\\הגשה 3.csproj": {}
+    "C:\\Users\\user1\\Pictures\\ToDoList\\ToDoListC#\\הגשה 3.csproj": {}
   },
   "projects": {
-    "C:\\Users\\user1\\Pictures\\הגשה 3\\הגשה 3.csproj": {
+    "C:\\Users\\user1\\Pictures\\ToDoList\\ToDoListC#\\הגשה 3.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user1\\Pictures\\הגשה 3\\הגשה 3.csproj",
+        "projectUniqueName": "C:\\Users\\user1\\Pictures\\ToDoList\\ToDoListC#\\הגשה 3.csproj",
         "projectName": "הגשה 3",
-        "projectPath": "C:\\Users\\user1\\Pictures\\הגשה 3\\הגשה 3.csproj",
+        "projectPath": "C:\\Users\\user1\\Pictures\\ToDoList\\ToDoListC#\\הגשה 3.csproj",
         "packagesPath": "C:\\Users\\user1\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user1\\Pictures\\הגשה 3\\obj\\",
+        "outputPath": "C:\\Users\\user1\\Pictures\\ToDoList\\ToDoListC#\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
