@@ -3176,11 +3176,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user1\\Pictures\\ToDoList\\ToDoListC#\\הגשה 3.csproj",
-      "projectName": "הגשה 3",
-      "projectPath": "C:\\Users\\user1\\Pictures\\ToDoList\\ToDoListC#\\הגשה 3.csproj",
+      "projectUniqueName": "C:\\Users\\user1\\Pictures\\ToDoList\\ToDoListServer\\ToDoListServer.csproj",
+      "projectName": "ToDoListServer",
+      "projectPath": "C:\\Users\\user1\\Pictures\\ToDoList\\ToDoListServer\\ToDoListServer.csproj",
       "packagesPath": "C:\\Users\\user1\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user1\\Pictures\\ToDoList\\ToDoListC#\\obj\\",
+      "outputPath": "C:\\Users\\user1\\Pictures\\ToDoList\\ToDoListServer\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
