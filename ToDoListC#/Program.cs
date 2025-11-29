@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using TodoApi;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Configure Services
@@ -23,6 +22,23 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 var app = builder.Build();
+
+// --- בדיקת חיבור למסד ---
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ToDoDbContext>();
+    try
+    {
+        if (db.Database.CanConnect())
+            Console.WriteLine("? Connected to Clever-Cloud MySQL");
+        else
+            Console.WriteLine("? Cannot connect to database");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"? Database connection failed: {ex.Message}");
+    }
+}
 
 // Middleware
 app.UseCors();
