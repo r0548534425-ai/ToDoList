@@ -1,0 +1,16 @@
+# Visual Studio files
+.vs/
+*.suo
+*.user
+*.log
+
+# Binaries and build
+[Bb]in/
+[Oo]bj/
+
+# NuGet
+*.nupkg
+.nuget/
+
+# Temp files
+*~
