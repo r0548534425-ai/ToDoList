@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // כתובת ה-API שלךמפ
 const apiUrl = process.env.REACT_APP_API_BASE_URL;
-
+console.log("API URL Loaded:", apiUrl);
 const apiService = {
   // שליפת כל המשימות
   getTasks: async () => {
