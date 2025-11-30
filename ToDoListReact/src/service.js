@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // כתובת ה-API שלךמפ
-const apiUrl = process.env.REACT_APP_API_BASE_URL;
+const apiUrl = "https://todolistserver-g9dd.onrender.com";
 console.log("API URL Loaded:", apiUrl);
 const apiService = {
   // שליפת כל המשימות
