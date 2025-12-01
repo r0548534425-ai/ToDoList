@@ -1,17 +1,19 @@
 import axios from 'axios';
 
-// ⬅️ התיקון: ה-Fallback חייב לכלול את הנתיב /items
+// כתובת ה-API שלך - Fallback:
 const fallbackUrl = "https://todolistserver-g9dd.onrender.com/items";
-// אם המשתנה ריק, apiUrl יקבל את הכתובת המלאה
-const apiUrl = process.env.REACT_APP_API_BASE_URL || fallbackUrl; 
 
-// console.log("Environment vars:", process.env); // אין צורך בהדפסת כל המשתנים
+// ⬅️ התיקון הקריטי: בדיקה אם המשתנה ריק (או מחרוזת ריקה ""), אם כן, משתמשים ב-URL המלא המקובע.
+const apiUrl = process.env.REACT_APP_API_BASE_URL 
+               ? process.env.REACT_APP_API_BASE_URL 
+               : fallbackUrl; 
+
 console.log("API URL Loaded:", apiUrl); 
 
 const apiService = {
   // שליפת כל המשימות (GET)
   getTasks: async () => {
-    // ⬅️ עכשיו apiUrl מכיל את /items, אז לא מוסיפים אותו שוב
+    // apiUrl מכיל כעת את הכתובת המלאה כולל /items, לכן אין צורך להוסיף שוב
     const result = await axios.get(apiUrl); 
     return result.data;
   },
@@ -19,7 +21,7 @@ const apiService = {
   // הוספת משימה חדשה (POST)
   addTask: async (name) => {
     if (!name) throw new Error("Name is required");
-    // ⬅️ עכשיו apiUrl מכיל את /items, אז לא מוסיפים אותו שוב
+    // apiUrl מכיל כעת את הכתובת המלאה כולל /items, לכן אין צורך להוסיף שוב
     const result = await axios.post(apiUrl, { name, isComplete: false }); 
     return result.data;
   },
@@ -27,7 +29,7 @@ const apiService = {
   // עדכון isComplete (PUT)
   setCompleted: async (id, isComplete, currentName) => {
     if (id == null) throw new Error("Id is required");
-    // ⬅️ מוסיפים רק את ה-ID
+    // מוסיפים רק את ה-ID
     const result = await axios.put(`${apiUrl}/${id}`, { 
       id,
       name: currentName, 
@@ -39,7 +41,7 @@ const apiService = {
   // מחיקת משימה (DELETE)
   deleteTask: async (id) => {
     if (id == null) throw new Error("Id is required");
-    // ⬅️ מוסיפים רק את ה-ID
+    // מוסיפים רק את ה-ID
     await axios.delete(`${apiUrl}/${id}`); 
   }
 };

@@ -6,13 +6,13 @@ function App() {
   const [todos, setTodos] = useState([]);
 
   async function getTodos() {
-    // ⬅️ תיקון 1: הוספת try...catch
+    // ⬅️ טיפול בשגיאות: מונע מ-todos להיות undefined במקרה של כשלון API
     try {
       const todos = await service.getTasks();
       setTodos(todos);
     } catch (error) {
         console.error("Failed to load todos:", error);
-        setTodos([]); // הגדרה מפורשת למערך ריק במקרה של כשלון
+        setTodos([]); // הגדרה מפורשת למערך ריק
     }
   }
 
@@ -24,7 +24,7 @@ function App() {
   }
 
   async function updateCompleted(todo, isComplete) {
-    // ⬅️ תיקון נוסף: שליחת שם המשימה כדי למנוע שגיאות 400 אם ה-Backend דורש זאת
+    // ⬅️ שליחת שם המשימה ל-PUT (נדרש על ידי רוב שרתי ה-REST)
     await service.setCompleted(todo.id, isComplete, todo.name);
     await getTodos();
   }
@@ -48,7 +48,7 @@ function App() {
       </header>
       <section className="main" style={{ display: "block" }}>
         <ul className="todo-list">
-            {/* ⬅️ תיקון 2: הבדיקה Array.isArray(todos) */}
+            {/* ⬅️ מניעת קריסה: מוודא ש-todos הוא מערך לפני הפעלת map */}
           {Array.isArray(todos) && todos.map(todo => {
             return (
               <li className={todo.isComplete ? "completed" : ""} key={todo.id}>
