@@ -4,7 +4,7 @@ import { Trash2, Edit, CheckSquare, PlusCircle } from 'lucide-react';
 import './App.css'; 
 
 // 🛑 עדכון קריטי: כתובת ה-Backend המלאה והנכונה
-const API_URL = "https://todolistserver-g9dd.onrender.com/items"; // ⬅️ זו הכתובת המלאה
+const API_URL = "https://todolistserver-g9dd.onrender.com"; // ⬅️ זו הכתובת המלאה
 
 function App() {
   const [tasks, setTasks] = useState([]);
