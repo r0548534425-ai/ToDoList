@@ -2,57 +2,62 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Trash2, Edit, CheckSquare, PlusCircle, X } from 'lucide-react'; 
 
-// 🛑 IMPORTANT: The API URL is hardcoded here based on your provided context.
-// In a real environment, you should use environment variables.
-const API_URL = "https://todolistserver-g9dd.onrender.com"; 
+// 🛑 IMPORTANT: Use an environment variable if available, otherwise fallback to the hardcoded URL.
+// The hardcoded URL MUST point to the Backend (Server) URL, not the Frontend URL.
+// IF YOUR BACKEND ADDRESS IS DIFFERENT, CHANGE IT HERE.
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "https://todolistserver-g9dd.onrender.com"; 
 
-// --- API Service Implementation ---
-const apiService = {
-  // Base URL remains constant for all calls
-  apiUrl: API_URL,
+// --- API Service Implementation (Integrated) ---
 
-  // Function to handle API call retry with exponential backoff
-  fetchWithRetry: async (fetchFunction) => {
-    const maxRetries = 5;
-    let delay = 1000;
-    
-    for (let i = 0; i < maxRetries; i++) {
-      try {
-        return await fetchFunction();
-      } catch (error) {
-        if (i === maxRetries - 1) {
-          console.error("API call failed after multiple retries:", error);
-          throw error;
-        }
-        console.warn(`Retry attempt ${i + 1} of ${maxRetries}. Retrying in ${delay / 1000}s...`);
-        await new Promise(resolve => setTimeout(resolve, delay));
-        delay *= 2; // Exponential backoff
+// Function to handle API call retry with exponential backoff
+const fetchWithRetry = async (fetchFunction) => {
+  const maxRetries = 5;
+  let delay = 1000;
+  
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      return await fetchFunction();
+    } catch (error) {
+      if (i === maxRetries - 1) {
+        // Only log a hard error on final failure
+        console.error("API call failed after multiple retries:", error);
+        throw error;
       }
+      // Log warning for retry attempts
+      console.warn(`Retry attempt ${i + 1} of ${maxRetries}. Retrying in ${delay / 1000}s...`);
+      await new Promise(resolve => setTimeout(resolve, delay));
+      delay *= 2; // Exponential backoff
     }
-  },
+  }
+};
+
+const apiService = {
+  // Expose the URL for the App component to display it in the UI
+  apiUrl: API_BASE_URL,
 
   // GET: Fetch all tasks
-  getTasks: async () => {
-    return apiService.fetchWithRetry(async () => {
-      const result = await axios.get(`${apiService.apiUrl}/items`);
+  getTasks: async function() {
+    return fetchWithRetry(async () => {
+      // Use API_BASE_URL directly since the service is defined within the same file scope
+      const result = await axios.get(`${API_BASE_URL}/items`);
       return result.data;
     });
   },
 
   // POST: Add new task
-  addTask: async (name) => {
+  addTask: async function(name) {
     if (!name) throw new Error("Name is required");
-    return apiService.fetchWithRetry(async () => {
-      const result = await axios.post(`${apiService.apiUrl}/items`, { name, isComplete: false });
+    return fetchWithRetry(async () => {
+      const result = await axios.post(`${API_BASE_URL}/items`, { name, isComplete: false });
       return result.data;
     });
   },
 
   // PUT: Toggle completion status
-  setCompleted: async (id, isComplete, currentName) => {
+  setCompleted: async function(id, isComplete, currentName) {
     if (id == null) throw new Error("Id is required");
-    return apiService.fetchWithRetry(async () => {
-      const result = await axios.put(`${apiService.apiUrl}/items/${id}`, {
+    return fetchWithRetry(async () => {
+      const result = await axios.put(`${API_BASE_URL}/items/${id}`, {
         id,
         name: currentName, 
         isComplete
@@ -62,18 +67,18 @@ const apiService = {
   },
 
   // DELETE: Delete a task
-  deleteTask: async (id) => {
+  deleteTask: async function(id) {
     if (id == null) throw new Error("Id is required");
-    return apiService.fetchWithRetry(async () => {
-      await axios.delete(`${apiService.apiUrl}/items/${id}`);
+    return fetchWithRetry(async () => {
+      await axios.delete(`${API_BASE_URL}/items/${id}`);
     });
   },
-
+  
   // PUT: Edit task name
-  editTask: async (id, newName, isComplete) => {
+  editTask: async function(id, newName, isComplete) {
     if (id == null || !newName) throw new Error("Id and name are required");
-    return apiService.fetchWithRetry(async () => {
-      const result = await axios.put(`${apiService.apiUrl}/items/${id}`, {
+    return fetchWithRetry(async () => {
+      const result = await axios.put(`${API_BASE_URL}/items/${id}`, {
         id,
         name: newName,
         isComplete
@@ -107,7 +112,8 @@ function App() {
         setError("Received unexpected data format from the server.");
       }
     } catch (e) {
-      setError("Failed to load tasks. Please ensure the backend server is running.");
+      // Display the exact URL that failed in the error message
+      setError(`Failed to load tasks from: ${apiService.apiUrl}. Please ensure the backend server is running and accessible.`);
       console.error(e);
     } finally {
       setLoading(false);
@@ -126,10 +132,8 @@ function App() {
     setLoading(true);
     setError(null);
     try {
-      // API call to add the task
       await apiService.addTask(newTaskName.trim());
       setNewTaskName('');
-      // Refresh the list
       await fetchTasks();
     } catch (e) {
       setError("Failed to add task.");
@@ -147,7 +151,6 @@ function App() {
       setTasks(tasks.filter(task => task.id !== id));
     } catch (e) {
       setError("Failed to delete task.");
-      // If delete fails, re-fetch to ensure sync
       await fetchTasks();
     } finally {
       setLoading(false);
@@ -161,13 +164,11 @@ function App() {
       const newCompletionStatus = !task.isComplete;
       await apiService.setCompleted(task.id, newCompletionStatus, task.name);
       
-      // Update UI optimistically
       setTasks(tasks.map(t => 
         t.id === task.id ? { ...t, isComplete: newCompletionStatus } : t
       ));
     } catch (e) {
       setError("Failed to update task completion status.");
-      // If update fails, re-fetch to ensure sync
       await fetchTasks();
     } finally {
       setLoading(false);
@@ -211,7 +212,7 @@ function App() {
           My To-Do List
         </h1>
         <p className="text-sm text-gray-500 mb-6 text-center">
-            Backend URL: <code className="text-xs font-mono bg-gray-100 p-1 rounded">{API_URL}</code>
+            Backend URL: <code className="text-xs font-mono bg-gray-100 p-1 rounded">{apiService.apiUrl}</code>
         </p>
 
         {/* Error/Loading Messages */}
