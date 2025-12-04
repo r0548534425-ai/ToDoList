@@ -5,7 +5,7 @@ import { Trash2, Edit, CheckSquare, PlusCircle, X } from 'lucide-react';
 // 🛑 IMPORTANT: Use an environment variable if available, otherwise fallback to the hardcoded URL.
 // The hardcoded URL MUST point to the Backend (Server) URL, not the Frontend URL.
 // IF YOUR BACKEND ADDRESS IS DIFFERENT, CHANGE IT HERE.
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "https://todolistserver2-dgdj.onrender.com"; 
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "https://todolistserver-g9dd.onrender.com"; 
 
 // --- API Service Implementation (Integrated) ---
 
