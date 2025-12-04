@@ -1,0 +1,212 @@
+/* כל העיצוב הקיים של הקלאסים שלך, בלי Tailwind */
+
+/* רקע גלובלי וגופן */
+.min-h-screen {
+    min-height: 100vh;
+}
+.bg-gray-50 {
+    background-color: #f9fafb;
+}
+.flex {
+    display: flex;
+}
+.flex-col {
+    flex-direction: column;
+}
+.items-center {
+    align-items: center;
+}
+.p-4 {
+    padding: 1rem;
+}
+.md\:p-8 {
+    padding: 2rem;
+}
+.w-full {
+    width: 100%;
+}
+.max-w-xl {
+    max-width: 36rem;
+}
+.bg-white {
+    background-color: #ffffff;
+}
+.shadow-2xl {
+    box-shadow: 0 25px 50px rgba(0,0,0,0.1);
+}
+.rounded-xl {
+    border-radius: 1rem;
+}
+.p-6 {
+    padding: 1.5rem;
+}
+.mt-10 {
+    margin-top: 2.5rem;
+}
+.text-4xl {
+    font-size: 2.25rem;
+}
+.font-extrabold {
+    font-weight: 800;
+}
+.text-blue-600 {
+    color: #2563eb;
+}
+.mb-6 {
+    margin-bottom: 1.5rem;
+}
+.text-center {
+    text-align: center;
+}
+.text-sm {
+    font-size: 0.875rem;
+}
+.text-gray-500 {
+    color: #6b7280;
+}
+.text-xs {
+    font-size: 0.75rem;
+}
+.font-mono {
+    font-family: monospace;
+}
+.bg-gray-100 {
+    background-color: #f3f4f6;
+}
+.p-1 {
+    padding: 0.25rem;
+}
+.rounded {
+    border-radius: 0.25rem;
+}
+.flex-grow {
+    flex-grow: 1;
+}
+.border {
+    border-width: 1px;
+    border-style: solid;
+}
+.border-gray-300 {
+    border-color: #d1d5db;
+}
+.rounded-lg {
+    border-radius: 0.5rem;
+}
+.focus\:ring-blue-500:focus {
+    outline: 2px solid #3b82f6;
+}
+.focus\:border-blue-500:focus {
+    border-color: #3b82f6;
+}
+.transition {
+    transition: all 0.2s;
+}
+.duration-150 {
+    transition-duration: 150ms;
+}
+.shadow-sm {
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+.bg-blue-600 {
+    background-color: #2563eb;
+}
+.text-white {
+    color: #ffffff;
+}
+.hover\:bg-blue-700:hover {
+    background-color: #1d4ed8;
+}
+.disabled\:bg-gray-400:disabled {
+    background-color: #9ca3af;
+}
+.gap-2 {
+    gap: 0.5rem;
+}
+.space-y-3 > * + * {
+    margin-top: 0.75rem;
+}
+.rounded-full {
+    border-radius: 9999px;
+}
+.text-green-600 {
+    color: #16a34a;
+}
+.hover\:text-green-800:hover {
+    color: #166534;
+}
+.hover\:bg-green-100:hover {
+    background-color: #d1fae5;
+}
+.text-gray-500 {
+    color: #6b7280;
+}
+.hover\:text-gray-700:hover {
+    color: #374151;
+}
+.hover\:bg-gray-100:hover {
+    background-color: #f3f4f6;
+}
+.text-blue-600 {
+    color: #2563eb;
+}
+.hover\:text-blue-800:hover {
+    color: #1e40af;
+}
+.hover\:bg-blue-100:hover {
+    background-color: #dbeafe;
+}
+.text-red-600 {
+    color: #dc2626;
+}
+.hover\:text-red-800:hover {
+    color: #991b1b;
+}
+.hover\:bg-red-100:hover {
+    background-color: #fee2e2;
+}
+.line-through {
+    text-decoration: line-through;
+}
+.text-gray-400 {
+    color: #9ca3af;
+}
+.truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.cursor-pointer {
+    cursor: pointer;
+}
+.bg-yellow-100 {
+    background-color: #fef3c7;
+}
+.text-yellow-800 {
+    color: #92400e;
+}
+.p-3 {
+    padding: 0.75rem;
+}
+.rounded-lg {
+    border-radius: 0.5rem;
+}
+.flex-grow {
+    flex-grow: 1;
+}
+.task-name::before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    border: 2px solid #16a34a; /* מסגרת של הוי */
+    border-radius: 3px;
+    vertical-align: middle;
+}
+
+.task-name.completed::before {
+    content: '✓';
+    color: #16a34a;
+    font-weight: bold;
+    text-align: center;
+}

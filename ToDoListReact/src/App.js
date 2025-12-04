@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Trash2, Edit, CheckSquare, PlusCircle, X } from 'lucide-react'; 
+import './style.css';
 
 // 🛑 IMPORTANT: Use an environment variable if available, otherwise fallback to the hardcoded URL.
 // The hardcoded URL MUST point to the Backend (Server) URL, not the Frontend URL.
@@ -288,6 +289,8 @@ function App() {
                   {task.name}
                 </span>
               )}
+              
+
 
               {/* Action Buttons */}
               <div className="flex space-x-2 ml-4">
